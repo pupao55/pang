@@ -1,0 +1,20 @@
+node_modules
+.next
+out
+dist
+.env*.local
+*.tsbuildinfo
+.DS_Store
+
+# Local data cache and generated reports. Per-folder .gitkeep stubs are committed.
+data/akshare/daily-bars/*.json
+data/akshare/import-report.json
+data/signals/**/*.jsonl
+data/signals/**/*.json
+reports/*.md
+!reports/.gitkeep
+!data/akshare/.gitkeep
+!data/akshare/daily-bars/.gitkeep
+!data/signals/.gitkeep
+__pycache__/
+*.pyc

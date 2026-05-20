@@ -1,0 +1,68 @@
+import type { SectorSnapshot } from "@/lib/types/market";
+import { EVAL_DATE } from "./mockDailyBars";
+
+export const MOCK_SECTORS: SectorSnapshot[] = [
+  {
+    date: EVAL_DATE,
+    sectorName: "人工智能 / AI",
+    pctChange: 3.4,
+    limitUpCount: 9,
+    topStocks: ["688202", "300101"],
+    strengthRank: 1,
+    momentumScore: 84,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "算力 / Computing Power",
+    pctChange: 3.1,
+    limitUpCount: 7,
+    topStocks: ["300101", "688202"],
+    strengthRank: 2,
+    momentumScore: 80,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "固态电池 / Solid-state Battery",
+    pctChange: 2.5,
+    limitUpCount: 5,
+    topStocks: ["600303"],
+    strengthRank: 3,
+    momentumScore: 72,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "低空经济 / Low-altitude Economy",
+    pctChange: 1.8,
+    limitUpCount: 3,
+    topStocks: ["300505", "300212"],
+    strengthRank: 4,
+    momentumScore: 66,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "机器人 / Robotics",
+    pctChange: 1.2,
+    limitUpCount: 2,
+    topStocks: ["002404"],
+    strengthRank: 5,
+    momentumScore: 62,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "医疗信息化 / Healthcare IT",
+    pctChange: -0.6,
+    limitUpCount: 0,
+    topStocks: [],
+    strengthRank: 18,
+    momentumScore: 32,
+  },
+  {
+    date: EVAL_DATE,
+    sectorName: "传统制造 / Traditional Manufacturing",
+    pctChange: -1.2,
+    limitUpCount: 0,
+    topStocks: [],
+    strengthRank: 25,
+    momentumScore: 22,
+  },
+];

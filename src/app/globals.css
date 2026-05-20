@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: #f6f7f9;
+  color: #111827;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Numeric columns scan better with tabular figures. */
+.tabular-nums,
+th[scope="col"],
+td.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle hover for rows in research tables. */
+.row-hover:hover {
+  background-color: rgba(37, 99, 235, 0.04); /* blue-600 / 4% */
+}

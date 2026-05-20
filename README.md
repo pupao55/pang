@@ -57,6 +57,79 @@ a top-of-page **Demo Status** card with a one-click button into
 
 ---
 
+## Horizon-aware calibration (v1.9)
+
+After v1.8 finished generating local sector strength the score calibration
+verdict moved from `INCONCLUSIVE` to `NOT_CALIBRATED` — the 5-day forward
+return showed a *negative* rank correlation with the score, even though the
+80-90 bucket carried a +8% / 88% win one-day blowout. The issue isn't the
+score; it's the horizon we evaluated it on.
+
+v1.9 adds **horizon-aware calibration**: it reports forward returns and win
+rates at 1d / 2d / 3d / 5d / 10d for every strategy and every score bucket,
+classifies the result into one of:
+
+- `MOMENTUM_1D` — works for 1 day, fades after.
+- `MEAN_REVERTS_AFTER_1D` — 1d edge that flips negative by 5d.
+- `SHORT_SWING_3D` / `SWING_5D` — multi-day edge.
+- `NO_EDGE` — no horizon profitable.
+- `INCONCLUSIVE` — sample below 30.
+
+### Why 1d edge and 5d edge are different
+
+A breakout that pops 4% on day 1 and then drifts back to flat by day 5 is a
+**real edge** — just not for a 5-day hold. Strategies should be backtested at
+the horizon they were designed for. Mixing horizons across strategies makes
+the calibration verdict look worse than the model actually is.
+
+### Why high-score momentum may mean-revert
+
+In the BaoStock 169-symbol cache the 80+ bucket is dominated by
+`limitUpSecondBuy` signals firing after a 涨停 + 缩量回踩 setup. These tend to
+gap-up and fade — classic 1d momentum, not a swing. Holding through 5 days
+gives back most of the move and incurs additional risk.
+
+### Why score weights should not be changed until validated
+
+`scripts/horizon_calibration.ts` sweeps a constrained weight grid and prints
+the best 1d / 3d / 5d / 10d picks plus a "robust" choice with the lowest
+median rank across horizons. It deliberately does **not** edit
+`src/lib/config/constants.ts`. The output is a recommendation only — picking
+the best single-horizon weight set risks overfitting to the dataset we used
+for tuning.
+
+### How to run
+
+```bash
+npm run rebuild:signals -- --source baostockLocal --rebuild
+npm run calibrate:horizons
+```
+
+The first command repopulates the signal store with component scores
+(v1.9 added `technicalScore` / `sectorScore` / `sentimentScore` /
+`liquidityScore` / `fundamentalSafetyScore` / `riskPenalty` to
+`HistoricalSignalRecord`). The second command runs:
+
+1. Horizon calibration per strategy + per score bucket.
+2. Score weight sweep (advisory, no constants edited).
+3. SectorLeader tightening sweep (sweeps `minSectorRankPercentile`,
+   `minStockRankWithinSectorPercentile`, `minMemberCount`, sector types).
+4. FirstBreakout gate review (counts rejections at each gate, names the
+   weakest, suggests relaxation).
+
+Output: `reports/horizon-calibration-report.md`. The /validation page shows a
+one-card summary (best horizon for high-score signals + recommended next
+action) and a link to the markdown.
+
+### Honest limitations
+
+- The sweep tightens but cannot loosen — only existing historical signals
+  are reweighted. Loosening sectorLeader requires re-running
+  `rebuild:signals` with a modified strategy.
+- The conservative pick requires top-bucket sample ≥ 50; with the current
+  169-symbol cache the 90-100 bucket is still in the low double-digits.
+  Treat all "best weights" output as exploratory until top-bucket n ≥ 100.
+
 ## Local sector strength (v1.8)
 
 BaoStock's free tier does **not** provide full historical concept / industry

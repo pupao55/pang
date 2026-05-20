@@ -1,0 +1,568 @@
+{
+  "startedAt": "2026-05-20T19:44:24+00:00",
+  "completedAt": "2026-05-20T19:47:43+00:00",
+  "args": {
+    "startDate": "2024-01-01",
+    "endDate": "2026-05-19",
+    "adjust": "qfq",
+    "limit": 0,
+    "resume": true,
+    "force": false,
+    "skip_existing": true,
+    "failed_only": false,
+    "max_symbols_per_run": 0,
+    "sleep_range": [
+      0.2,
+      0.5
+    ],
+    "retry": 2,
+    "stop_after_consecutive_failures": 8
+  },
+  "attempts": [
+    {
+      "symbol": "600519.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600036.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600028.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601318.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601398.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601628.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601288.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601988.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600000.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600016.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600519.SH",
+      "outcome": "SKIPPED",
+      "reason": "resume:already-success"
+    },
+    {
+      "symbol": "601012.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601857.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601225.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600015.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600030.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600837.SH",
+      "outcome": "SUCCESS",
+      "rows": 280
+    },
+    {
+      "symbol": "601336.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600276.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600585.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600196.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600660.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600886.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600009.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600271.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600406.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600436.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600438.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600487.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600690.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600703.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600745.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600809.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600872.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600887.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600900.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "600999.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601009.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601066.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601088.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601111.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601166.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601169.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601186.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601211.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601238.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601319.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601377.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601601.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601633.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601658.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601668.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601669.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601688.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601727.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601766.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601788.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601877.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601888.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601899.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601919.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601933.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601985.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "601989.SH",
+      "outcome": "SUCCESS",
+      "rows": 407
+    },
+    {
+      "symbol": "603259.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "603288.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "603501.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "603799.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "603883.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "603986.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002230.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002241.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002304.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002352.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002460.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002475.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002493.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002508.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002594.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002714.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002812.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "002916.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300033.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300059.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300122.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300124.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300144.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300274.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300316.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300347.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300408.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300433.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300476.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300498.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300661.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300760.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300782.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300896.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "300999.SZ",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688008.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688009.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688012.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688036.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688041.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688111.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688126.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688169.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688256.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    },
+    {
+      "symbol": "688981.SH",
+      "outcome": "SUCCESS",
+      "rows": 572
+    }
+  ]
+}
