@@ -37,16 +37,17 @@ data/akshare/fetch-runs/*.json
 data/signals/**/*.jsonl
 data/signals/**/*.json
 
-# Generated reports
-reports/*.md
-reports/*.json
-reports/*.jsonl
+# Generated reports (recurse so subdirs like reports/agent-council/ are covered)
+reports/**/*.md
+reports/**/*.json
+reports/**/*.jsonl
 
-# Allow fixtures and stub markers
+# Allow fixtures, stub markers, and the council report template
 !data/fixtures/
 !data/fixtures/**
 !**/.gitkeep
 !reports/.gitkeep
+!reports/agent-council/template.md
 
 __pycache__/
 *.pyc

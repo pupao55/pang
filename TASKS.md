@@ -116,7 +116,7 @@ Notes:
   records (see report note on counts).
 
 ## T-007: Audit `AUDIT.md` for open items
-Status: ready
+Status: done
 Owner: qa
 Priority: P2
 Depends on: none
@@ -125,9 +125,17 @@ Goal: Walk every `AUDIT-x-y` finding and confirm whether it has been
 addressed in v1.1–v1.9. Move open / not-fixed items into `BUGS.md` with
 severity, and mark the audit entry as `resolved` or `open`.
 Acceptance Criteria:
-- `BUGS.md` contains every still-open audit item with a stable id.
-- `AUDIT.md` carries a top section "Status as of v1.9".
-- No code is changed by this task.
+- ✅ `AUDIT.md` carries a "Status as of v1.9" table covering all 43
+  findings (resolved / open / wontfix-by-design / wontfix-with-context).
+- ✅ `BUGS.md` carries B-015 (B-2 state machine bias), B-016 (E-2 risk
+  penalty cap), B-017 (H-2 single mock snapshot), B-018 (I-2 recharts
+  cosmetic), B-019 (J-7 ST tiering) — the five still-open audit items
+  that were not already mirrored.
+- ✅ No code was changed.
+Notes:
+- Counts: 27 resolved, 12 open (covered by B-008, B-010–B-019), 4
+  wontfix-by-design, 1 wontfix-with-context (M-1 mooted by real data).
+- Picked by the agent council on 2026-05-21 (score 23.50, docs-only).
 
 ## T-008: Document the licensing + data-redistribution position
 Status: ready

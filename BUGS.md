@@ -215,6 +215,91 @@ Status: open
 Source: AUDIT.md D-4.
 Linked Task: -
 
+### B-015: `limitUpSecondBuy` state machine biases toward older real limit-ups
+Severity: minor
+Area: `src/lib/strategies/limitUpSecondBuyStrategy.ts`
+Found: v1.1 (`AUDIT.md` B-2); refactor deferred at v1.1, still open at v1.9.
+Repro Steps:
+1. Read `limitUpSecondBuyStrategy.ts` and trace which prior limit-up the
+   state machine selects when several candidates exist in the window.
+Expected: deterministic, well-justified pick (e.g., the most recent valid
+limit-up).
+Actual: order of evaluation biases toward earlier (older) limit-ups within
+the lookback window. Documented in AUDIT B-2 but the refactor was
+"deferred — no behavior change needed."
+Suggested Fix: refactor to walk the window most-recent-first and select
+the first valid candidate. Add a regression test pinning the chosen bar.
+Status: open (cosmetic / behavior-stable).
+Source: AUDIT.md B-2.
+Linked Task: -
+
+### B-016: `riskPenalty` cap at 60 is arbitrary
+Severity: minor
+Area: `src/lib/engine/riskFilter.ts`, `src/lib/config/constants.ts`
+Found: v1.1 (`AUDIT.md` E-2); documented and kept.
+Repro Steps:
+1. Stack three or more risk reasons on a single signal (regulatory + recent
+   unlock + failed limit-up); observe the total penalty saturates at 60.
+Expected: a tuned cap derived from the calibration data, not a round number.
+Actual: the cap is a hand-picked guardrail; no calibration-driven
+justification.
+Suggested Fix: derive the cap from the per-strategy quality + calibration
+data (after T-006-equivalent work on the score model). Until then leave
+as-is.
+Status: open (low-priority tuning).
+Source: AUDIT.md E-2.
+Linked Task: -
+
+### B-017: Mock sector / sentiment is a single date snapshot
+Severity: minor
+Area: `src/lib/data/adapters/mockAdapter.ts`, `src/lib/data/mockSectors.ts`, `src/lib/data/mockSentiment.ts`
+Found: v1.1 (`AUDIT.md` H-2); v1.8 local sector builder closes the
+*live-data* side, but the mock adapter still serves a single static snapshot.
+Repro Steps:
+1. Run any test or demo that walks dates against the mock adapter.
+2. Sector and sentiment are identical for every date.
+Expected: a small per-date series so historical-replay tests cover the
+sector/sentiment time axis.
+Actual: one snapshot for the entire EVAL_DATE.
+Suggested Fix: ship a tiny synthetic time series under `data/fixtures/` and
+have the mock adapter walk it by date. Bounded by T-011 fixture conventions.
+Status: open (test / fixture quality).
+Source: AUDIT.md H-2.
+Linked Task: see also T-011 (fixture conventions).
+
+### B-018: Recharts horizontal-reference uses `dataKey={() => support}`
+Severity: nit
+Area: `src/components/KLineChart.tsx`
+Found: v1.1 (`AUDIT.md` I-2); deferred as cosmetic.
+Repro Steps:
+1. Open any stock detail page in `npm run dev` and inspect the KLine chart.
+Expected: idiomatic Recharts pattern (a numeric `y` prop on the reference
+line).
+Actual: a function-form `dataKey` that returns a constant — works, but
+verbose and confuses future readers.
+Suggested Fix: switch to `<ReferenceLine y={support} ... />` form.
+Status: open (cosmetic).
+Source: AUDIT.md I-2.
+Linked Task: -
+
+### B-019: No `风险警示` differentiation (ST vs *ST vs 退市整理)
+Severity: minor
+Area: `src/lib/types/stock.ts` (`StockMeta`), `src/lib/engine/riskFilter.ts`
+Found: v1.1 (`AUDIT.md` J-7); documented and deferred.
+Repro Steps:
+1. Inspect `StockMeta` — only a boolean `isST` flag exists.
+2. Run the risk filter on a `*ST` or `退市整理` stock — penalty is the same
+   as ordinary ST.
+Expected: separate severity for `*ST` (delisting risk) and `退市整理`
+(delisting underway), with progressively heavier penalties.
+Actual: a single `isST` boolean conflates all three categories.
+Suggested Fix: extend `StockMeta` with `stRiskLevel: "NONE" | "ST" | "STAR_ST"
+| "DELISTING"` (or similar), update `riskFilter` to penalize accordingly,
+update the BaoStock fetcher to populate the field.
+Status: open.
+Source: AUDIT.md J-7.
+Linked Task: -
+
 ### B-014: No suspension / 停牌 / 除权 awareness
 Severity: minor
 Area: backtest + risk filter

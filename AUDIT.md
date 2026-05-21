@@ -13,6 +13,76 @@ Severity rubric:
 
 ---
 
+## Status as of v1.9 (T-007 audit walk, 2026-05-20)
+
+Every finding below is reconciled to its current state. Open items are
+mirrored into `BUGS.md` with stable B-NNN ids; resolved items remain in
+this document for historical context.
+
+| Finding | Title | v1.9 status | BUGS.md |
+|---|---|---|---|
+| **A-1** | Sequential-compounding portfolio | resolved (v1.1 rewrite) | — |
+| **A-2** | `findIndex` end-date off-by-many | resolved (v1.1) | — |
+| **A-3** | No transaction costs / slippage / stamp duty | resolved (`costs.ts`) | — |
+| **A-4** | Backtest ignores risk + score thresholds | resolved (v1.1) | — |
+| **A-5** | Sector/sentiment global, not time-indexed | resolved for live data (v1.8 local sector builder) | — |
+| **A-6** | No T+1 enforcement | resolved (v1.1) | — |
+| **A-7** | No price-limit (涨停/跌停) execution | resolved (v1.1 with skipped-signal log) | — |
+| **A-8** | Drawdown computed trade-to-trade | resolved (v1.1 daily equity series) | — |
+| **A-9** | Annualised return uses calendar days | **open** (documented; tuning) | **B-010** |
+| **A-10** | Duplicate-overlap per symbol | resolved (`allowSameSymbolOverlap`) | — |
+| **A-11** | Dead constant | resolved (v1.1) | — |
+| **B-1** | `limitUpSecondBuy` max-turnover bar includes today | resolved (v1.1) | — |
+| **B-2** | State machine biases toward older real limit-ups | **open** (cosmetic) | **B-015** |
+| **B-3** | `isLimitUpBar` close-based proxy over-flags | resolved (`closeEqualsHighEpsilon`) | — |
+| **B-4** | `isNearLimitUpBar` too loose | resolved (threshold raised + `wasFailedLimitUpBar`) | — |
+| **B-5** | Pure-function confirmation | n/a (note only) | — |
+| **C-1** | RSI seed uses simple avg | accepted as OK | — |
+| **C-2** | `calculateMA` returns NaN for warm-up | n/a (intentional) | — |
+| **C-3** | `findMaxTurnoverBar` semantics ambiguous | **open** (cosmetic) | **B-011** |
+| **D-1** | `positives`/`negatives` regex-over-strings | resolved (typed buckets) | — |
+| **D-2** | `SCORE_WEIGHTS` not asserted to sum to 1 | resolved (runtime assertion + test) | — |
+| **D-3** | `ACTION_THRESHOLDS` arbitrary | **open** (tuning) | **B-012** |
+| **D-4** | `scoreFundamentalSafety` rewards size | **open** (semantic) | **B-013** |
+| **E-1** | Failed-limit-up close vs intraday seal | resolved (new util + risk filter switched) | — |
+| **E-2** | `riskPenalty` cap at 60 | **open** (tuning) | **B-016** |
+| **E-3** | No suspension / 停牌 / 除权 awareness | **open** (data + risk) | **B-014** |
+| **F-1** | Merge silently discards alternate strategies | resolved (`corroboratingStrategies` field) | — |
+| **F-2** | `runSignalEngine` re-evaluates risk before strategies | wontfix-by-design (note only) | — |
+| **G-1** | Forward returns fabricated when no future bars | resolved (PENDING label) | — |
+| **G-2** | Review runs the engine on EVAL_DATE only | resolved (`reviewEngine.ts`) | — |
+| **H-1** | Mock data engineered to fire on EVAL_DATE | resolved (disclaimers + UI banner) | — |
+| **H-2** | Single sector & sentiment mock snapshot | **open** for mock side (live resolved by v1.8) | **B-017** |
+| **H-3** | Module-level bar cache | wontfix-by-design (intentional) | — |
+| **I-1** | `StockSignalTable` `strategyName` split | resolved (structured `STRATEGIES`) | — |
+| **I-2** | Recharts `dataKey={() => support}` cosmetic | **open** (nit) | **B-018** |
+| **J-1** | `PULLBACK_TOLERANCE_PCT` global | resolved (split into three named constants) | — |
+| **J-2** | No 涨跌停 execution in backtest | resolved (same as A-7) | — |
+| **J-3** | No T+1 in backtest | resolved (same as A-6) | — |
+| **J-4** | No transaction-cost modelling | resolved (same as A-3) | — |
+| **J-5** | No suspension / corporate-action handling | **open** (same root cause as E-3) | **B-014** |
+| **J-6** | BJ (北交所) board not modeled | **open** | **B-008** |
+| **J-7** | No ST vs *ST vs 退市整理 differentiation | **open** | **B-019** |
+| **K-1** | `runSignalEngine` always uses the latest bar | resolved (`asOfDate` parameter) | — |
+| **K-2** | Sector snapshot is "today's" during replay | resolved (per-asOfDate sectors in v1.8) | — |
+| **K-3** | Sentiment snapshot global | resolved (per-asOfDate sentiment in v1.8) | — |
+| **L-1** | Same symbol can re-signal next bar after exit | wontfix-by-design (intentional re-entry) | — |
+| **L-2** | Same strategy + same stock + multiple bars | wontfix-by-design (intentional) | — |
+| **M-1** | Strategy thresholds tuned to staged events | wontfix-with-context (mock-universe artefact; mooted by real BaoStock data) | — |
+| **M-2** | `firstBreakoutStrategy` 60-day rise cap | resolved (named config constant) | — |
+
+**Headline counts** (43 findings):
+- 27 resolved by v1.1 or later.
+- 12 still open — all mirrored in `BUGS.md` as B-008, B-010–B-019 (overlapping where one BUGS entry covers two audit items).
+- 4 wontfix-by-design (F-2, H-3, L-1, L-2).
+- 1 wontfix-with-context (M-1 — fixed implicitly when the staged mock data was replaced by real BaoStock data).
+
+No new audit items were added in this walk — every still-open finding
+was already a known limitation; this pass just gave each one a stable
+bug id so the council can plan around it. No code was changed.
+
+---
+
 ## A. Backtest engine
 
 ### A-1 (CRITICAL) Sequential-compounding portfolio model overstates returns

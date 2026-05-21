@@ -83,10 +83,17 @@ const FORBIDDEN_PATTERNS = [
     why: "Persistent signal store — regenerable via npm run rebuild:signals",
   },
   {
+    // Note: reports/agent-council/template.md is allow-listed below (it's
+    // a tracked template, not a generated report).
     re: /^reports\/(?!\.gitkeep$).+\.(md|json|jsonl)$/,
     why: "Generated report — regenerable via npm run validate:* / calibrate:*",
   },
 ];
+
+// Paths that look like forbidden patterns but are intentionally tracked.
+const ALLOWLIST = new Set([
+  "reports/agent-council/template.md",
+]);
 
 const FIXTURE_EXEMPT = /^data\/fixtures\//;
 
@@ -129,6 +136,7 @@ function fileSize(rel) {
 
 function classify(rel) {
   const violations = [];
+  if (ALLOWLIST.has(rel)) return violations;
 
   // Pattern check (provider caches, reports, signal store)
   for (const p of FORBIDDEN_PATTERNS) {

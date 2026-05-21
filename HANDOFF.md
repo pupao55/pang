@@ -106,6 +106,23 @@ npm run calibrate:horizons
 
 ## Session log
 
+### 2026-05-20 — T-007 audit walk-through (council-picked)
+- Reconciled every AUDIT.md finding (43 total) to its v1.9 state.
+- Added "Status as of v1.9" table to `AUDIT.md` at the top, with each
+  finding labelled resolved / open / wontfix-by-design / wontfix-with-context
+  and (where open) cross-referenced to a B-NNN entry in `BUGS.md`.
+- Added 5 new entries B-015 through B-019 covering the still-open audit
+  items not previously mirrored:
+  - B-015 (B-2) `limitUpSecondBuy` state machine bias — minor
+  - B-016 (E-2) `riskPenalty` cap at 60 — minor
+  - B-017 (H-2) Single sector / sentiment mock snapshot — minor
+  - B-018 (I-2) Recharts horizontal-reference cosmetic — nit
+  - B-019 (J-7) No ST / *ST / 退市整理 differentiation — minor
+- Counts: 27 audit findings resolved, 12 open (B-008, B-010–B-019),
+  4 wontfix-by-design (F-2, H-3, L-1, L-2), 1 wontfix-with-context (M-1
+  — staged-mock issue mooted by real BaoStock data).
+- **No code changed.** TASKS.md T-007 marked done.
+
 ### 2026-05-20 — T-004 /validation smoke test + council meta-loop fix
 - First task executed via the new agent-council loop (`npm run agent:council`
   picked it; `NEXT_ACTION.md` flagged `SAFE_TO_PROCEED`).
