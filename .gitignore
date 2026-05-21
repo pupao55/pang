@@ -6,15 +6,47 @@ dist
 *.tsbuildinfo
 .DS_Store
 
-# Local data cache and generated reports. Per-folder .gitkeep stubs are committed.
+# ── Data cache policy (D-007 + T-011) ─────────────────────────────────────
+# Local provider caches are not source. They live on disk per machine and
+# are regenerable via the fetcher scripts. Tiny deterministic fixtures may
+# live under data/fixtures/ and are tracked.
+#
+# .gitignore does NOT untrack files already in the index. See
+# reports/data-cache-audit.md for the recommended `git rm --cached` cleanup
+# commands. Run `npm run check:data-policy` to surface violations.
+
+# BaoStock bulk caches
+data/baostock/daily-bars/*.json
+data/baostock/sectors/*.json
+data/baostock/sentiment/sentiment.jsonl
+data/baostock/metadata/stocks.json
+data/baostock/import-report.json
+data/baostock/fetch-status.json
+data/baostock/fetch-runs/*.json
+
+# AkShare bulk caches
 data/akshare/daily-bars/*.json
+data/akshare/sectors/*.json
+data/akshare/sentiment/sentiment.jsonl
+data/akshare/trading-calendar.json
 data/akshare/import-report.json
+data/akshare/fetch-status.json
+data/akshare/fetch-runs/*.json
+
+# Persistent signal store — always regenerable via npm run rebuild:signals
 data/signals/**/*.jsonl
 data/signals/**/*.json
+
+# Generated reports
 reports/*.md
+reports/*.json
+reports/*.jsonl
+
+# Allow fixtures and stub markers
+!data/fixtures/
+!data/fixtures/**
+!**/.gitkeep
 !reports/.gitkeep
-!data/akshare/.gitkeep
-!data/akshare/daily-bars/.gitkeep
-!data/signals/.gitkeep
+
 __pycache__/
 *.pyc
