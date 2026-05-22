@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "pretest": "npm run check:agent-workspace && npm run check:data-policy",
     "test": "vitest run",
     "test:watch": "vitest",
     "check:agent-workspace": "node scripts/check-agent-workspace.mjs",

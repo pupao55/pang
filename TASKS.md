@@ -22,20 +22,23 @@ Notes:
 ---
 
 ## T-001: Wire `check:agent-workspace` into the test/build flow
-Status: ready
+Status: done
 Owner: backend
 Priority: P2
 Depends on: none
-Files: `package.json`, `scripts/check-agent-workspace.mjs`
-Goal: Decide whether `check:agent-workspace` should run automatically (pre-commit hook or part of `npm test`) so the ops-files contract does not silently rot.
+Files: `package.json`, `DECISIONS.md`
+Goal: Decide and wire the contracts so they cannot silently rot.
 Acceptance Criteria:
-- A decision is recorded in `DECISIONS.md`.
-- If automated: a single command (`npm test` or a hook) fails when an ops
-  file is missing.
-- If not automated: `HANDOFF.md` documents that the script is manual.
+- ✅ Decision recorded as D-008.
+- ✅ `npm test` now runs `pretest` first, which executes both
+  `check:agent-workspace` and `check:data-policy`. If either fails, vitest
+  is never invoked.
+- ✅ No new dependency added (deliberately chose `pretest` over husky).
 Notes:
-- Avoid coupling to husky / lefthook without an explicit decision — adding a
-  hook tool is a dependency change.
+- Picked by the agent council on 2026-05-21 (score 22.00, risk class `backend`).
+- See D-008 for the considered alternatives. T-010 (GitHub Actions) remains
+  open as a future complement — it runs the same checks in CI, not as a
+  replacement for the local `pretest` gate.
 
 ## T-002: Document the "no auto-tune constants" rule in code
 Status: ready

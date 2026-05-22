@@ -106,6 +106,16 @@ npm run calibrate:horizons
 
 ## Session log
 
+### 2026-05-21 — T-001 wired ops contracts into `npm test`
+- Added `"pretest": "npm run check:agent-workspace && npm run check:data-policy"`
+  to package.json. Now every `npm test` invocation first verifies the
+  ops-files contract and the no-bulk-cache contract before vitest starts.
+- Recorded the decision as D-008 (chose `pretest` over husky / lefthook to
+  avoid a new dev-dependency).
+- Verified: pretest runs both checks; vitest still ships 258/258.
+- TASKS.md T-001 marked done. T-010 (GitHub Actions complement) stays open.
+- **No application code touched.**
+
 ### 2026-05-20 — T-007 audit walk-through (council-picked)
 - Reconciled every AUDIT.md finding (43 total) to its v1.9 state.
 - Added "Status as of v1.9" table to `AUDIT.md` at the top, with each

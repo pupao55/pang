@@ -48,7 +48,15 @@ Reason: Matching the convention is correct for the target audience and ships wit
 Rejected Alternatives:
 - US-style green-up to avoid confusion for English readers — rejected; the target user is mainland or HK-based and reads A-share data daily.
 
-## D-006: Keep `firstBreakout` as EXPERIMENTAL / DIAGNOSTIC_ONLY
+## D-008: Wire ops + data-policy contracts into `npm test` via `pretest`
+Date: 2026-05-21
+Context: T-001 asked whether `check:agent-workspace` (and now `check:data-policy`) should run automatically. The agentic workspace + data-policy contracts are only useful if they cannot silently rot. Options considered: (a) a `pretest` script in package.json — runs before every `npm test`; (b) a husky / lefthook pre-commit hook — runs before every commit; (c) leave them manual.
+Decision: Adopt **option (a)** — `"pretest": "npm run check:agent-workspace && npm run check:data-policy"`. `npm test` is the most-frequently-run gate; if either contract fails, vitest never starts, which is the loudest possible failure mode.
+Reason: Zero new dependency. Zero new installation step. Reversible by deleting one line. Covers both CI (when CI eventually runs) and local development in a single move.
+Rejected Alternatives:
+- **Husky / lefthook pre-commit hook** — adds a new devDependency, requires a per-clone `husky install` step, and only fires at commit time (lets a broken state linger until then). Per D-002's general "no new dependency without an explicit decision" posture, deferred.
+- **Manual** — has already silently rotted twice in this project's history (the `reports/**/*.md` gitignore bug found during T-007 cleanup; the `.next` artifact issue earlier). Manual contracts aren't contracts.
+- **GitHub Actions workflow** — useful when CI exists, but does nothing for the local loop. Will be added on top of `pretest` later (T-010 still pending).
 Date: 2026-05-20
 Context: The v1.9 horizon-aware calibration report (`reports/horizon-calibration-report.md`) showed `firstBreakout` produced only 33 historical signals across the full BaoStock cache and classified the strategy as `NO_EDGE` (1d +1.23%, 5d -1.72%, win5d 33%). The gate-review diagnostic (`scripts/horizon_calibration.ts` §6) showed the `platformBreakout` gate rejects 96.3% of candidates that survive the 60-day rise cap; the strategy is therefore better described as **too strict** than as **broken**.
 Decision: `firstBreakout` stays in `src/lib/strategies/index.ts`, but is treated as **EXPERIMENTAL / DIAGNOSTIC_ONLY**:
